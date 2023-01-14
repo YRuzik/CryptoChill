@@ -2,45 +2,62 @@ import {useSelector} from "react-redux";
 import MainService from "../../services/MainService";
 import {useEffect} from "react";
 import {coinsFetching} from "../../actions";
-import {Container} from "../../styles/styles";
-import {CoinList, HeaderText, Table} from "./CoinsTable.style";
+import {Container, Error} from "../../styles/styles";
+import {Table, TBody, TBodyTR, THead, THeadLabels, THeadTR, WrapperDiv} from "./CoinsTable.style";
 import {coin} from "../../interfaces/interfaces";
 import CoinsTableItem from "../coinsTableItem/CoinsTableItem";
+import Spinner from "../spinner/Spinner";
 
 
 const CoinsTable = () => {
-    /*const {coins, coinsLoadingStatus}: any = useSelector(state => state)
+
+    const {coins, coinsLoadingStatus}: any = useSelector(state => state)
 
     const {getAllCoins, dispatch} = MainService();
 
     useEffect(() => {
         dispatch(coinsFetching());
-        getAllCoins()
+        getAllCoins();
     }, [])
 
-    console.log(coins)*/
+    if (coinsLoadingStatus === 'loading') {
+        return <Spinner/>
+    } else if (coinsLoadingStatus === 'error') {
+        return <Error>Ошибка загрузки...</Error>
+    }
 
-    function renderItems (arr: []) {
-        let res = arr.map((item: coin, i: number) => {
-            return <CoinsTableItem key={i}/>
+    function renderItems (arr: object[]) {
+        return arr.map(({...props}, id) => {
+            return (
+                <TBodyTR key={id}>
+                    <CoinsTableItem current={id} {...props}/>
+                </TBodyTR>
+            )
         })
     }
 
+
+    const elements = renderItems(coins)
+
     return (
         <Container>
-            <Table>
-                <HeaderText>
-                    #
-                </HeaderText>
-            </Table>
-
-            <Table style={{marginTop: '2rem'}}>
-                <CoinList>
-                    <li>
-
-                    </li>
-                </CoinList>
-            </Table>
+            <WrapperDiv>
+                <Table>
+                    <THead>
+                        <THeadTR>
+                            <THeadLabels>#</THeadLabels>
+                            <THeadLabels>Название</THeadLabels>
+                            <THeadLabels>Стоимость</THeadLabels>
+                            <THeadLabels>Изменение</THeadLabels>
+                            <THeadLabels>Таблица</THeadLabels>
+                            <THeadLabels>Детали</THeadLabels>
+                        </THeadTR>
+                    </THead>
+                    <TBody>
+                        {elements}
+                    </TBody>
+                </Table>
+            </WrapperDiv>
         </Container>
     )
 }

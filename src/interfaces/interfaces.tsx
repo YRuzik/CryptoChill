@@ -3,25 +3,29 @@ export interface states {
     coinsLoadingStatus: string;
 }
 
+
+
 export interface coin {
-    asset_id: string;
+    id: string;
+    rank: string;
+    symbol: string;
     name: string;
-    type_is_crypto: number;
-    data_start: string;
-    data_end: string;
-    data_quote_start: string;
-    data_quote_end: string;
-    data_orderbook_start: string;
-    data_orderbook_end: string;
-    data_trade_start: string;
-    data_trade_end: string;
-    data_symbols_count: number;
-    volume_1hrs_usd: number;
-    volume_1day_usd: number;
-    volume_1mth_usd: number;
-    price_usd: number;
+    supply: string;
+    maxSupply: string;
+    marketCapUsd: string;
+    volumeUsd24Hr: string;
+    priceUsd: string;
+    changePercent24Hr: string;
+    vwap24Hr: string;
 }
 
-export interface keyable {
-    [key: string]: any
+export interface coinIcons {
+    asset_id: string;
+    url: string;
 }
+
+export interface latestData {
+    priceUsd: string;
+    time: number;
+}
+

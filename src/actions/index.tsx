@@ -1,3 +1,5 @@
+import {coinIcons} from "../interfaces/interfaces";
+
 export const coinsFetching = () => {
     return {
         type: 'COINS_FETCHING'
