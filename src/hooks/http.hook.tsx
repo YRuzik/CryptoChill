@@ -2,7 +2,7 @@ import {useCallback} from "react";
 
 export const useHttp: any = () => {
 
-    const request = useCallback(async (url: string, method = 'GET', body = null, headers = {'X-CoinAPI-Key': '52074F2B-AB6B-45CF-BA4F-B4DA6C4BF5DD'}) => {
+    const request = useCallback(async (url: string, method = 'GET', body = null, headers = {'X-CoinAPI-Key': 'API Key: 8184F278-9656-4722-BE4C-8546EE185259'}) => {
 
         try {
             const response = await fetch(url, {method, body, headers});
