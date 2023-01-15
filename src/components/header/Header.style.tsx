@@ -6,7 +6,7 @@ const TextBase =`
     color: #7e7e7e;
     font-size: 35px;
     line-height:44px
-`
+    `
 
 export const NavContainer = styled.div`
     display: flex;
@@ -28,7 +28,9 @@ export const BoxItem = styled.li`
     ${TextBase};
     display:flex;
     align-items:center;
-    margin-right:15px
+    margin-right:15px;
+    a{text-decoration:none}
+    color: ${(isActive) =>(isActive) ? '#000000' : '#7e7e7e7e'}
 `
 export const Links = styled(Link)`
     display:flex;

@@ -1,5 +1,5 @@
 import { NavContainer,Box,BoxItem,Links} from './Header.style';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 // @ts-ignore
 import Logo from './Logo'
 
@@ -21,14 +21,17 @@ const Header = () => {
             <Box style={{margin:'9%'}}></Box>
             <nav>
                 <Box>
-                    <BoxItem style={{marginRight: '10px'}}><Link style={{
+                    <BoxItem 
+                    style={{marginRight: '10px'}}>
+                        <NavLink
+                        to='/about-us'>
+                            About us
+                            </NavLink>
+                    </BoxItem>
+                    <BoxItem><NavLink style={{
                         color:'#7E7E7E',
                         textDecoration:'none'
-                    }} to='/about-us'>About us</Link></BoxItem>
-                    <BoxItem><Link style={{
-                        color:'#7E7E7E',
-                        textDecoration:'none'
-                    }} to='/contact-us'>Contact us</Link></BoxItem>
+                    }} to='/contact-us'>Contact us</NavLink></BoxItem>
                 </Box>
                 
             </nav>
