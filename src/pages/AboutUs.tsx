@@ -1,7 +1,8 @@
+import About from "../components/aboutInf/about";
 
 const AboutUs = () => {
     return (
-        <h1>About us works!</h1>
+        <About/>
     )
 }
 
