@@ -3,8 +3,6 @@ export interface states {
     coinsLoadingStatus: string;
 }
 
-
-
 export interface coin {
     id: string;
     rank: string;

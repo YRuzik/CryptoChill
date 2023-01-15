@@ -9,24 +9,33 @@ import eth from "../../resources/img/eth.png"
 import usdt from "../../resources/img/usdt.png"
 import mainService from "../../services/MainService";
 import {latestData} from "../../interfaces/interfaces";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import TableCharts from "../tableCharts/TableCharts";
 
 
 const CoinsTableItem = ({name, symbol, priceUsd, current, id}: any) => {
     const [changes, setChanges] = useState<string | number >(0)
+    const [allChanges, setAllChanges] = useState<latestData[]>()
     const {getHistoryOfCoin} = mainService();
 
-    const usdToRub = Math.floor(priceUsd * 67)
+    const usdToRubAndFormat = new Intl.NumberFormat("ru", {style: "decimal"}).format(+(priceUsd * 67).toFixed(2))
 
     let currentIMG = ''
 
-    const takeChanges = async () => {
+    const takeLastChanges = async () => {
         let latestData: any[] = []
         await getHistoryOfCoin(id).then(data => latestData.push(data.data.filter((item: latestData, i: number) => i === data.data.length-1 || i === data.data.length - 2)))
         await setChanges ((Number(latestData[0][1].priceUsd-latestData[0][0].priceUsd)/latestData[0][0].priceUsd * 100).toFixed(2))
     }
 
-    takeChanges()
+    const takeAllChanges = async () => {
+        await getHistoryOfCoin(id).then(data => setAllChanges(data.data))
+    }
+
+    useEffect(() => {
+        takeAllChanges()
+        takeLastChanges()
+    }, [])
 
     switch (symbol) {
         case 'BTC':
@@ -44,6 +53,8 @@ const CoinsTableItem = ({name, symbol, priceUsd, current, id}: any) => {
         default: break
     }
 
+
+
     return (
         <>
             <TBodyTD>{current+1}</TBodyTD>
@@ -54,12 +65,14 @@ const CoinsTableItem = ({name, symbol, priceUsd, current, id}: any) => {
                     <span style={{opacity: 0.5, paddingLeft: '0.5rem'}}>{symbol}</span>
                 </a>
             </TBodyTD>
-            <TBodyTD>~{usdToRub} RUB</TBodyTD>
+            <TBodyTD>{usdToRubAndFormat} ₽</TBodyTD>
             <TBodyTD style={changes > 0 ? {color: 'green'} : {color: 'red'}}>
                 {changes > 0 ? '+' : '-'}
                 {changes !== undefined ? changes : 'in process'}%
             </TBodyTD>
-            <TBodyTD>in progress</TBodyTD>
+            <TBodyTD>
+                <TableCharts data={allChanges}/>
+            </TBodyTD>
             <TBodyTD><Button>More</Button></TBodyTD>
         </>
     )
