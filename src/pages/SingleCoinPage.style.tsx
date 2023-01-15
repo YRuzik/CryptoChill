@@ -27,3 +27,28 @@ export const Information = styled.div`
   border-radius: 25px;
   box-shadow: 0px 0px 30px rgba(0,0,0,.15);
 `
+
+export const ChangerButton = styled.button`
+  margin-left: 1rem;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 20px;
+  padding: 0.2rem 1rem 0.2rem 1rem;
+  cursor: pointer;
+  background: white;
+  transition: all 0.2s ease-in-out;
+  
+  &:hover {
+    box-shadow: 0 0 15px rgba(0,0,0,.2);
+    background: rgba(0,0,0,.05);
+  }
+  
+  &__active {
+    background: gray;
+  }
+`
+
+export const WrapperChangerButton = styled.div`
+  display: flex;
+  justify-content: end;
+`

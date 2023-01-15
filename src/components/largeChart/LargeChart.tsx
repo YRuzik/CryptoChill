@@ -1,15 +1,18 @@
 import {AreaChart, Area, XAxis, YAxis, Tooltip, Legend} from "recharts";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import mainService from "../../services/MainService";
 import {useParams} from "react-router";
 import {latestData} from "../../interfaces/interfaces";
 import {coinsFetched, coinsFetching} from "../../actions";
+import {ChangerButton, WrapperChangerButton} from "../../pages/SingleCoinPage.style";
 
 const LargeChart = () => {
     const [allChanges, setAllChanges] = useState<latestData[]>()
+    const inputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
     const {getHistoryOfCoin} = mainService()
     const {bitcoinID} = useParams()
+
     const takeAllChanges = async () => {
         await getHistoryOfCoin(bitcoinID).then(data => setAllChanges(data.data.map((item: any) => {
             return {
@@ -19,6 +22,11 @@ const LargeChart = () => {
             }
             }
         )))
+    }
+
+    const onClick = () => {
+        //@ts-ignore
+        console.log(inputRef.current.target())
     }
 
     let style = ''
@@ -45,6 +53,15 @@ const LargeChart = () => {
     }, [])
 
     return (
+        <>
+            <WrapperChangerButton>
+                <ChangerButton onClick={() => {
+                    onClick()
+                }}>1 Y.</ChangerButton>
+                <ChangerButton >1 M.</ChangerButton>
+                <ChangerButton >1 W.</ChangerButton>
+                <ChangerButton >1 D.</ChangerButton>
+            </WrapperChangerButton>
         <AreaChart width={1280} height={500} data={allChanges} style={{margin: '0', padding: '0'}}>
             <defs>
                 <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -56,6 +73,7 @@ const LargeChart = () => {
             <Tooltip content={CustomTooltip}/>
             <Area name={'USD'} type="monotone" dataKey={'priceUsd'} stroke={style} fill={'url(#colorUv)'} fillOpacity={1} />
         </AreaChart>
+        </>
     )
 }
 
