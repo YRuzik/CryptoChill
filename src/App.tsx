@@ -12,6 +12,8 @@ function App() {
         <main>
           <Routes>
             <Route path={'/'} element={<CoinsTable />}/>
+            <Route path={'/about-us'}/>
+            <Route path={'/contact-us'}/>
           </Routes>
         </main>
       </div>

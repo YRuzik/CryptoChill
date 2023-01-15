@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 const TextBase =`
     font-family: 'Quicksand';
     font-style: 'normal';
@@ -30,10 +29,4 @@ export const BoxItem = styled.li`
     align-items:center;
     margin-right:15px;
     a{text-decoration:none}
-    color: ${(isActive) =>(isActive) ? '#000000' : '#7e7e7e7e'}
-`
-export const Links = styled(Link)`
-    display:flex;
-    align-items:center;
-    text-decoration:none;
 `
