@@ -23,13 +23,19 @@ const MainService = () => {
         )
     }
 
-    const getHistoryOfCoin = async(id: string) => {
+    const getHistoryOfCoin = async(id: string | undefined) => {
         return (
             await request(`${_baseURL}assets/${id}/history?interval=d1`)
         )
     }
 
-    return {getAllCoins, dispatch, getHistoryOfCoin}
+    const getCoin = async(id: string) => {
+        return (
+            await request(`${_baseURL}assets/${id}`)
+        )
+    }
+
+    return {getAllCoins, dispatch, getHistoryOfCoin, getCoin}
 }
 
 export default MainService;

@@ -1,4 +1,10 @@
-import {Button, TBodyTD} from "../coinsTable/CoinsTable.style";
+import {Button, LinkTo, TBodyTD} from "../coinsTable/CoinsTable.style";
+import mainService from "../../services/MainService";
+import {latestData} from "../../interfaces/interfaces";
+import {useEffect, useState} from "react";
+import TableCharts from "../tableCharts/TableCharts";
+import {Link} from "react-router-dom";
+
 // @ts-ignore
 import ada from "../../resources/img/ada.png"
 // @ts-ignore
@@ -7,26 +13,15 @@ import bit from "../../resources/img/bit.png"
 import eth from "../../resources/img/eth.png"
 // @ts-ignore
 import usdt from "../../resources/img/usdt.png"
-import mainService from "../../services/MainService";
-import {latestData} from "../../interfaces/interfaces";
-import {useEffect, useState} from "react";
-import TableCharts from "../tableCharts/TableCharts";
 
 
-const CoinsTableItem = ({name, symbol, priceUsd, current, id}: any) => {
-    const [changes, setChanges] = useState<string | number >(0)
+const CoinsTableItem = ({name, symbol, priceUsd, current, id, changePercent24Hr}: any) => {
     const [allChanges, setAllChanges] = useState<latestData[]>()
     const {getHistoryOfCoin} = mainService();
 
-    const usdToRubAndFormat = new Intl.NumberFormat("ru", {style: "decimal"}).format(+(priceUsd * 67).toFixed(2))
-
+    const priceFormat = new Intl.NumberFormat("eu", {style: "decimal"}).format(+(Number(priceUsd).toFixed(2)))
+    changePercent24Hr = Number(changePercent24Hr).toFixed(2)
     let currentIMG = ''
-
-    const takeLastChanges = async () => {
-        let latestData: any[] = []
-        await getHistoryOfCoin(id).then(data => latestData.push(data.data.filter((item: latestData, i: number) => i === data.data.length-1 || i === data.data.length - 2)))
-        await setChanges ((Number(latestData[0][1].priceUsd-latestData[0][0].priceUsd)/latestData[0][0].priceUsd * 100).toFixed(2))
-    }
 
     const takeAllChanges = async () => {
         await getHistoryOfCoin(id).then(data => setAllChanges(data.data))
@@ -34,7 +29,6 @@ const CoinsTableItem = ({name, symbol, priceUsd, current, id}: any) => {
 
     useEffect(() => {
         takeAllChanges()
-        takeLastChanges()
     }, [])
 
     switch (symbol) {
@@ -53,22 +47,20 @@ const CoinsTableItem = ({name, symbol, priceUsd, current, id}: any) => {
         default: break
     }
 
-
-
     return (
         <>
             <TBodyTD>{current+1}</TBodyTD>
             <TBodyTD>
-                <a style={{display: 'flex', flex: '1 1 auto', alignItems: "center"}}>
+                <LinkTo to={`/${id}`}>
                     <img style={{paddingRight: '0.5rem'}} src={currentIMG !== undefined ? currentIMG : undefined}/>
                     {name}
                     <span style={{opacity: 0.5, paddingLeft: '0.5rem'}}>{symbol}</span>
-                </a>
+                </LinkTo>
             </TBodyTD>
-            <TBodyTD>{usdToRubAndFormat} ₽</TBodyTD>
-            <TBodyTD style={changes > 0 ? {color: 'green'} : {color: 'red'}}>
-                {changes > 0 ? '+' : '-'}
-                {changes !== undefined ? changes : 'in process'}%
+            <TBodyTD>{priceFormat} $</TBodyTD>
+            <TBodyTD style={changePercent24Hr > 0 ? {color: 'green'} : {color: 'red'}}>
+                {changePercent24Hr > 0 ? '+' : null}
+                {changePercent24Hr !== undefined ? changePercent24Hr : 'in process'}%
             </TBodyTD>
             <TBodyTD>
                 <TableCharts data={allChanges}/>

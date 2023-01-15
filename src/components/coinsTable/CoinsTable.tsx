@@ -4,7 +4,6 @@ import {useEffect} from "react";
 import {coinsFetching} from "../../actions";
 import {Container, Error} from "../../styles/styles";
 import {Table, TBody, TBodyTR, THead, THeadLabels, THeadTR, WrapperDiv} from "./CoinsTable.style";
-import {coin} from "../../interfaces/interfaces";
 import CoinsTableItem from "../coinsTableItem/CoinsTableItem";
 import Spinner from "../spinner/Spinner";
 
@@ -18,6 +17,13 @@ const CoinsTable = () => {
     useEffect(() => {
         dispatch(coinsFetching());
         getAllCoins();
+    }, [])
+
+    useEffect(() => {
+        const timerID = setInterval(getAllCoins, 5000)
+        return () => {
+            clearInterval(timerID)
+        }
     }, [])
 
     if (coinsLoadingStatus === 'loading') {
@@ -46,11 +52,11 @@ const CoinsTable = () => {
                     <THead>
                         <THeadTR>
                             <THeadLabels>#</THeadLabels>
-                            <THeadLabels>Название</THeadLabels>
-                            <THeadLabels>Стоимость</THeadLabels>
-                            <THeadLabels>Изменение</THeadLabels>
-                            <THeadLabels>Таблица</THeadLabels>
-                            <THeadLabels>Детали</THeadLabels>
+                            <THeadLabels>Name</THeadLabels>
+                            <THeadLabels>Salary</THeadLabels>
+                            <THeadLabels>Changes</THeadLabels>
+                            <THeadLabels>Table</THeadLabels>
+                            <THeadLabels>Details</THeadLabels>
                         </THeadTR>
                     </THead>
                     <TBody>
