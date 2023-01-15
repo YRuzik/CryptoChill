@@ -1,9 +1,9 @@
-import {Button, LinkTo, TBodyTD} from "../coinsTable/CoinsTable.style";
+import {LinkButton, LinkTo, TBodyTD} from "../coinsTable/CoinsTable.style";
 import mainService from "../../services/MainService";
 import {latestData} from "../../interfaces/interfaces";
 import {useEffect, useState} from "react";
 import TableCharts from "../tableCharts/TableCharts";
-import {Link} from "react-router-dom";
+import {Link, Navigate, redirect} from "react-router-dom";
 
 // @ts-ignore
 import ada from "../../resources/img/ada.png"
@@ -65,7 +65,7 @@ const CoinsTableItem = ({name, symbol, priceUsd, current, id, changePercent24Hr}
             <TBodyTD>
                 <TableCharts data={allChanges}/>
             </TBodyTD>
-            <TBodyTD><Button>More</Button></TBodyTD>
+            <TBodyTD><LinkButton to={`/${id}`}>More</LinkButton></TBodyTD>
         </>
     )
 }

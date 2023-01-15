@@ -28,6 +28,22 @@ const SingleCoinPage = () => {
         getAllCoins();
     }, [])
 
+    const format = (value:string | number) => {
+        return new Intl.NumberFormat("eu", {style: "decimal"}).format(+(Number(value).toFixed(2)))
+    }
+
+    const renderItems = (label: string, value: string | number, style?: string) => {
+        if (value === '0') {
+            value = 'No Data'
+        }
+        return (
+            <Information>
+                <h3 style={{color: "rgba(0,0,0,.4)"}}>{label}</h3>
+                <h3 style={{color: style}}>{value}</h3>
+            </Information>
+        )
+    }
+
     if (coinsLoadingStatus === 'loading') {
         return <Spinner/>
     } else if (coinsLoadingStatus === 'error') {
@@ -86,30 +102,12 @@ const SingleCoinPage = () => {
                 <h1 style={{textAlign: 'start', marginLeft: '6rem'}}>Market Statistic</h1>
                     <hr style={{marginLeft: '6rem'}}/>
                 <Market>
-                    <Information>
-                        <h3 style={{color: "rgba(0,0,0,.4)"}}> 24hrs | Volume</h3>
-                        <h3>{new Intl.NumberFormat("eu", {style: "decimal"}).format(+(Number(currentCoin[0].volumeUsd24Hr).toFixed(2)))} $</h3>
-                    </Information>
-                    <Information>
-                        <h3 style={{color: "rgba(0,0,0,.4)"}}>Rank</h3>
-                        <h3>Top {currentCoin[0].rank}</h3>
-                    </Information>
-                    <Information>
-                        <h3 style={{color: "rgba(0,0,0,.4)"}}>24hrs | Average Price</h3>
-                        <h3>{new Intl.NumberFormat("eu", {style: "decimal"}).format(+(Number(currentCoin[0].vwap24Hr).toFixed(0)))} $</h3>
-                    </Information>
-                    <Information>
-                        <h3 style={{color: "rgba(0,0,0,.4)"}}>Changes</h3>
-                        <h3 style={{color: currentCoin[0].changePercent24Hr > 0 ? 'green' : 'red'}}>{currentCoin[0].changePercent24Hr > 0 ? '+' : null}{new Intl.NumberFormat("eu", {style: "decimal"}).format(+(Number(currentCoin[0].changePercent24Hr).toFixed(2)))}%</h3>
-                    </Information>
-                    <Information>
-                        <h3 style={{color: "rgba(0,0,0,.4)"}}>Max. Supplies</h3>
-                        <h3>{new Intl.NumberFormat("eu", {style: "decimal"}).format(+(Number(currentCoin[0].maxSupply).toFixed(0)))}</h3>
-                    </Information>
-                    <Information>
-                        <h3 style={{color: "rgba(0,0,0,.4)"}}>Available Supplies</h3>
-                        <h3>{new Intl.NumberFormat("eu", {style: "decimal"}).format(+(Number(currentCoin[0].supply).toFixed(0)))}</h3>
-                    </Information>
+                    {renderItems('24hrs | Volume', `${format(currentCoin[0].volumeUsd24Hr)} $`)}
+                    {renderItems('Rank', `Top ${currentCoin[0].rank}`)}
+                    {renderItems('24hrs | Average Price', `${format(currentCoin[0].vwap24Hr)} $`)}
+                    {renderItems('Changes', `${currentCoin[0].changePercent24Hr > 0 ? '+' : ''}${format(currentCoin[0].changePercent24Hr)}%`, currentCoin[0].changePercent24Hr > 0 ? 'green' : 'red')}
+                    {renderItems('Max. Supplies', `${format(currentCoin[0].maxSupply)}`)}
+                    {renderItems('Available Supplies', `${format(currentCoin[0].supply)}`)}
                 </Market>
                 </>
             :

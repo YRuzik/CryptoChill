@@ -84,17 +84,17 @@ export const LinkTo = styled(Link)`
   color: black;
 `
 
-export const Button = styled.button`
+export const LinkButton = styled(Link)`
   border: none;
   color: white;
   background: green;
-  width: 100px;
-  height: 40px;
   border-radius: 10px;
   font-weight: lighter;
   font-size: 1.5rem;
   cursor: pointer;
   transition: opacity 200ms ease-in-out;
+  text-decoration: none;
+  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
   
   &:hover {
     opacity: 0.8;

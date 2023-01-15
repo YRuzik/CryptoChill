@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import mainService from "../../services/MainService";
 import {useParams} from "react-router";
 import {latestData} from "../../interfaces/interfaces";
+import {coinsFetched, coinsFetching} from "../../actions";
 
 const LargeChart = () => {
     const [allChanges, setAllChanges] = useState<latestData[]>()
@@ -20,7 +21,26 @@ const LargeChart = () => {
         )))
     }
 
+    let style = ''
+    switch (bitcoinID) {
+        case 'bitcoin':
+            style = 'orange'
+            break;
+        case 'ethereum':
+            style = 'green'
+            break;
+        case 'tether':
+            style = 'blue'
+            break;
+        case 'cardano':
+            style = 'pink'
+            break;
+        default:
+            style = ''
+    }
+
     useEffect(() => {
+        coinsFetching()
         takeAllChanges()
     }, [])
 
@@ -28,13 +48,13 @@ const LargeChart = () => {
         <AreaChart width={1280} height={500} data={allChanges} style={{margin: '0', padding: '0'}}>
             <defs>
                 <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="20%" stopColor="orange" stopOpacity={0.8}/>
-                    <stop offset="100%" stopColor="orange" stopOpacity={0}/>
+                    <stop offset="20%" stopColor={style} stopOpacity={0.8}/>
+                    <stop offset="100%" stopColor={style} stopOpacity={0}/>
                 </linearGradient>
             </defs>
             <XAxis dataKey={'date'} domain={['']} />
             <Tooltip content={CustomTooltip}/>
-            <Area name={'USD'} type="monotone" dataKey={'priceUsd'} stroke="darkorange" fill={'url(#colorUv)'} fillOpacity={1} />
+            <Area name={'USD'} type="monotone" dataKey={'priceUsd'} stroke={style} fill={'url(#colorUv)'} fillOpacity={1} />
         </AreaChart>
     )
 }
