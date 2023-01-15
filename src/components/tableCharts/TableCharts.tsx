@@ -1,4 +1,4 @@
-import {LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line} from "recharts";
+import {LineChart, Line} from "recharts";
 
 const TableCharts = ({data}: any) => {
 
@@ -8,5 +8,4 @@ const TableCharts = ({data}: any) => {
         </LineChart>
     )
 }
-
 export default TableCharts;
