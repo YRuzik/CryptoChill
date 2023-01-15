@@ -46,11 +46,11 @@ const CoinsTable = () => {
                     <THead>
                         <THeadTR>
                             <THeadLabels>#</THeadLabels>
-                            <THeadLabels>Название</THeadLabels>
-                            <THeadLabels>Стоимость</THeadLabels>
-                            <THeadLabels>Изменение</THeadLabels>
-                            <THeadLabels>Таблица</THeadLabels>
-                            <THeadLabels>Детали</THeadLabels>
+                            <THeadLabels>Name</THeadLabels>
+                            <THeadLabels>Price</THeadLabels>
+                            <THeadLabels>Change</THeadLabels>
+                            <THeadLabels>Price Graph</THeadLabels>
+                            <THeadLabels>Details</THeadLabels>
                         </THeadTR>
                     </THead>
                     <TBody>

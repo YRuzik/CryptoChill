@@ -8,6 +8,8 @@ import AboutUs from "./pages/AboutUs";
 import Contacts from "./pages/Contacts";
 import SingleCoinPage from "./pages/SingleCoinPage";
 import Error404 from "./pages/404";
+//@ts-ignore
+import McDuck from './resources/gif/McDuck.gif';
 
 function App() {
   return (
@@ -32,6 +34,7 @@ function App() {
             </main>
 
         </div>
+        <footer className='FooterGif'><img src={McDuck}/></footer>
       </Router>
   );
 }

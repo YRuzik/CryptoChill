@@ -31,7 +31,9 @@ export const THeadLabels = styled.th`
   padding: 16px 48px 16px 0px;
   border-bottom: none;
   text-align: left;
-
+  font-family: 'Quicksand';
+  font-style: 'normal';
+  font-size: 20px;
   &:first-child {
     padding-left: 32px;
   }
