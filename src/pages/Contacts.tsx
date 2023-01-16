@@ -1,7 +1,7 @@
-
+import Contact from "../components/contactInf/contact";
 const Contacts = () => {
     return (
-        <h1>Contacts works!</h1>
+        <Contact />
     )
 }
 
