@@ -37,13 +37,13 @@ const Header = () => {
                             <NavLink style={({ isActive }) =>
                                 isActive ? on : off
                             }
-                                to='/about-us'>
+                                to='/about'>
                                 About us
                             </NavLink>
                         </BoxItem>
                         <BoxItem><NavLink style={({ isActive }) =>
                                 isActive ? on : off
-                            } to='/contact-us'>Contact us</NavLink></BoxItem>
+                            } to='/contacts'>Contact us</NavLink></BoxItem>
                     </Box>
 
                 </nav>
