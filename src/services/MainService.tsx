@@ -1,6 +1,6 @@
 import {useDispatch} from "react-redux";
 import {useHttp} from "../hooks/http.hook";
-import {coinsFetched, coinsFetchingError} from "../actions";
+import {coinFetched, coinsFetched, coinsFetchingError} from "../actions";
 import {coin} from "../interfaces/interfaces";
 
 
@@ -23,15 +23,17 @@ const MainService = () => {
         )
     }
 
-    const getHistoryOfCoin = async(id: string | undefined) => {
+    const getHistoryOfCoin = async(id: string | undefined , interval: string | undefined = 'd1') => {
         return (
-            await request(`${_baseURL}assets/${id}/history?interval=d1`)
+            await request(`${_baseURL}assets/${id}/history?interval=${interval}`)
         )
     }
 
-    const getCoin = async(id: string) => {
+    const getCoin = async(id: string | undefined) => {
         return (
             await request(`${_baseURL}assets/${id}`)
+                .then((res: any) => dispatch(coinFetched(res.data)))
+                .catch(() => dispatch(coinsFetchingError()))
         )
     }
 

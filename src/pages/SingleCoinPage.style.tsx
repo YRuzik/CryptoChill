@@ -42,10 +42,11 @@ export const ChangerButton = styled.button`
     box-shadow: 0 0 15px rgba(0,0,0,.2);
     background: rgba(0,0,0,.05);
   }
-  
-  &__active {
-    background: gray;
-  }
+`
+
+export const StyledChangerButton = styled(ChangerButton)`
+    background-color: pink;
+    font-size: large;
 `
 
 export const WrapperChangerButton = styled.div`

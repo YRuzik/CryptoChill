@@ -1,14 +1,16 @@
 import {AreaChart, Area, XAxis, YAxis, Tooltip, Legend} from "recharts";
-import {useEffect, useRef, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import mainService from "../../services/MainService";
 import {useParams} from "react-router";
 import {latestData} from "../../interfaces/interfaces";
 import {coinsFetched, coinsFetching} from "../../actions";
-import {ChangerButton, WrapperChangerButton} from "../../pages/SingleCoinPage.style";
+import {ChangerButton, StyledChangerButton, WrapperChangerButton} from "../../pages/SingleCoinPage.style";
+import {clearInterval} from "timers";
 
 const LargeChart = () => {
     const [allChanges, setAllChanges] = useState<latestData[]>()
-    const inputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+    const [oneDayChanges, setOneDayChanges] = useState<latestData[]>()
+    const [currentChanges, setCurrentChanges] = useState<latestData[]>()
 
     const {getHistoryOfCoin} = mainService()
     const {bitcoinID} = useParams()
@@ -24,10 +26,39 @@ const LargeChart = () => {
         )))
     }
 
-    const onClick = () => {
-        //@ts-ignore
-        console.log(inputRef.current.target())
+    const take1YChanges = async () => {
+        await takeAllChanges()
+        await setCurrentChanges(allChanges)
     }
+
+    const take1MChanges = async () => {
+        await takeAllChanges()
+        await setCurrentChanges(allChanges?.slice(allChanges?.length-31, allChanges?.length-1))
+    }
+
+    const take1WChanges = async () => {
+        await takeAllChanges()
+        await setCurrentChanges(allChanges?.slice(allChanges?.length-8, allChanges?.length-1))
+    }
+
+    const take1DChanges = async() => {
+        await takeHoursChanges()
+        await setCurrentChanges(oneDayChanges?.slice(oneDayChanges?.length-25, oneDayChanges?.length-1))
+    }
+
+    const takeHoursChanges = async () => {
+        await getHistoryOfCoin(bitcoinID, 'h1').then(data => setOneDayChanges(data.data.map((item: any) => {
+            return {
+                date: new Date(item.date).toLocaleDateString("en-US"),
+                priceUsd: Number(item.priceUsd).toFixed(2),
+                time: item.time
+            }
+        }
+        )))
+    }
+
+
+
 
     let style = ''
     switch (bitcoinID) {
@@ -50,19 +81,19 @@ const LargeChart = () => {
     useEffect(() => {
         coinsFetching()
         takeAllChanges()
+        takeHoursChanges()
+
     }, [])
 
     return (
         <>
             <WrapperChangerButton>
-                <ChangerButton onClick={() => {
-                    onClick()
-                }}>1 Y.</ChangerButton>
-                <ChangerButton >1 M.</ChangerButton>
-                <ChangerButton >1 W.</ChangerButton>
-                <ChangerButton >1 D.</ChangerButton>
+                <ChangerButton onClick={take1YChanges}>1 Y.</ChangerButton>
+                <ChangerButton onClick={take1MChanges}>1 M.</ChangerButton>
+                <ChangerButton onClick={take1WChanges}>1 W.</ChangerButton>
+                <ChangerButton onClick={take1DChanges}>1 D.</ChangerButton>
             </WrapperChangerButton>
-        <AreaChart width={1280} height={500} data={allChanges} style={{margin: '0', padding: '0'}}>
+        <AreaChart width={1280} height={500} data={currentChanges ? currentChanges : allChanges} style={{margin: '0', padding: '0'}}>
             <defs>
                 <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="20%" stopColor={style} stopOpacity={0.8}/>

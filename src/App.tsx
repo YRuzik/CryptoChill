@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Header from './components/header/Header';
-import {BrowserRouter as Router, Routes} from "react-router-dom";
+import {BrowserRouter as Router, Navigate, Routes, useRouteError} from "react-router-dom";
 import {Route} from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import AboutUs from "./pages/AboutUs";
@@ -20,15 +20,21 @@ function App() {
             <main>
               <Routes>
 
-                <Route path={"/"} element={<MainPage/>}/>
+                  <Route path={'/'}>
 
-                <Route path={"/about"} element={<AboutUs/>}/>
+                      <Route index element={<MainPage/>}/>
 
-                <Route path={"/contacts"} element={<Contacts/>}/>
+                      <Route path={"about"} element={<AboutUs/>}/>
 
-                <Route path={"/:bitcoinID"} element={<SingleCoinPage/>}/>
+                      <Route path={"contacts"} element={<Contacts/>}/>
 
-                <Route path={"*"} element={<Error404/>}/>
+                      <Route path={":bitcoinID"} element={<SingleCoinPage/>}/>
+
+                      <Route path={"404"} element={<Error404/>}/>
+
+                      <Route path={"*"} element={<Error404/> }/>
+
+                  </Route>
 
               </Routes>
             </main>
@@ -37,6 +43,12 @@ function App() {
         <footer className='FooterGif'><img src={McDuck}/></footer>
       </Router>
   );
+}
+
+function ErrorBoundary() {
+    let error = useRouteError()
+    console.log(error)
+    return <Error404/>
 }
 
 export default App;

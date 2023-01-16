@@ -2,6 +2,7 @@ import {states} from "../interfaces/interfaces";
 
 const initialState: states = {
     coins: [],
+    coin: [],
     coinsLoadingStatus: 'idle'
 }
 
@@ -24,6 +25,13 @@ function reducer (state: states = initialState, action: any) {
             return {
                 ...state,
                 coinsLoadingStatus: 'error'
+            }
+
+        case 'COIN_FETCHED':
+            return {
+                ...state,
+                coin: action.payload,
+                coinsLoadingStatus: 'idle'
             }
 
         default: return state;
