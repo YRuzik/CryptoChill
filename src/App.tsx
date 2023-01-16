@@ -26,7 +26,7 @@ function App() {
 
                 <Route path={"/contacts"} element={<Contacts/>}/>
 
-                <Route path={"/:bitcoinID"} element={<SingleCoinPage/>}/>
+                <Route path={"/:bitcoinID"} errorElement={<Error404/>} element={<SingleCoinPage/>}/>
 
                 <Route path={"*"} element={<Error404/>}/>
 
@@ -34,7 +34,7 @@ function App() {
             </main>
 
         </div>
-        <footer className='FooterGif'><img src={McDuck}/></footer>
+        <img className='FooterGif' src={McDuck}/>
       </Router>
   );
 }
