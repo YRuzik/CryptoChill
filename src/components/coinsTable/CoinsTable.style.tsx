@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Link} from "react-router-dom";
 
 
 export const WrapperDiv = styled.div`
@@ -32,7 +33,6 @@ export const THeadLabels = styled.th`
   border-bottom: none;
   text-align: left;
   font-family: 'Quicksand';
-  font-style: 'normal';
   font-size: 20px;
   &:first-child {
     padding-left: 32px;
@@ -52,7 +52,11 @@ export const TBody = styled.tbody`
 
 export const TBodyTR = styled.tr`
   user-select: none;
-  
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: rgba(0,0,0,.025);
+  }
 `
 
 export const TBodyTD = styled.td`
@@ -73,17 +77,25 @@ export const TBodyTD = styled.td`
   }
 `
 
-export const Button = styled.button`
+export const LinkTo = styled(Link)`
+  text-decoration: none;
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  color: black;
+`
+
+export const LinkButton = styled(Link)`
   border: none;
   color: white;
   background: green;
-  width: 100px;
-  height: 40px;
   border-radius: 10px;
   font-weight: lighter;
   font-size: 1.5rem;
   cursor: pointer;
   transition: opacity 200ms ease-in-out;
+  text-decoration: none;
+  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
   
   &:hover {
     opacity: 0.8;

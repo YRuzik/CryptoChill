@@ -1,5 +1,6 @@
 export interface states {
     coins: object[];
+    coin: object[];
     coinsLoadingStatus: string;
 }
 
@@ -25,5 +26,6 @@ export interface coinIcons {
 export interface latestData {
     priceUsd: string;
     time: number;
+    date: string;
 }
 

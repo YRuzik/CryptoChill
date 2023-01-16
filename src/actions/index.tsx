@@ -1,4 +1,4 @@
-import {coinIcons} from "../interfaces/interfaces";
+import {coin} from "../interfaces/interfaces";
 
 export const coinsFetching = () => {
     return {
@@ -16,5 +16,12 @@ export const coinsFetched = (coins: any) => {
 export const coinsFetchingError = () => {
     return {
         type: 'COINS_FETCHING_ERROR'
+    }
+}
+
+export const coinFetched = (coin: coin) => {
+    return {
+        type: 'COIN_FETCHED',
+        payload: coin
     }
 }
