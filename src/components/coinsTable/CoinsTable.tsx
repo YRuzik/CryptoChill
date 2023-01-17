@@ -1,7 +1,4 @@
 import {useSelector} from "react-redux";
-import MainService from "../../services/MainService";
-import {useEffect} from "react";
-import {coinsFetching} from "../../actions";
 import {Container, Error} from "../../styles/styles";
 import {Table, TBody, TBodyTR, THead, THeadLabels, THeadTR, WrapperDiv} from "./CoinsTable.style";
 import CoinsTableItem from "../coinsTableItem/CoinsTableItem";
@@ -9,22 +6,7 @@ import Spinner from "../spinner/Spinner";
 
 
 const CoinsTable = () => {
-
     const {coins, coinsLoadingStatus}: any = useSelector(state => state)
-
-    const {getAllCoins, dispatch} = MainService();
-
-    useEffect(() => {
-        dispatch(coinsFetching());
-        getAllCoins();
-    }, [])
-
-    useEffect(() => {
-        const timerID = setInterval(getAllCoins, 5000)
-        return () => {
-            clearInterval(timerID)
-        }
-    }, [])
 
     if (coinsLoadingStatus === 'loading') {
         return <Spinner/>
@@ -41,8 +23,7 @@ const CoinsTable = () => {
             )
         })
     }
-
-
+    
     const elements = renderItems(coins)
 
     return (

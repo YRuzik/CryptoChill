@@ -1,11 +1,7 @@
-import {useDispatch} from "react-redux";
 import {useHttp} from "../hooks/http.hook";
-import {coinFetched, coinsFetched, coinsFetchingError} from "../actions";
-import {resCoin} from "../interfaces/interfaces";
 
 
 const MainService = () => {
-    const dispatch = useDispatch();
     const {request} = useHttp();
 
     const _baseURL = 'https://api.coincap.io/v2/'
@@ -13,13 +9,6 @@ const MainService = () => {
     const getAllCoins = async() => {
         return (
             await request(`${_baseURL}assets`)
-                    .then((res: resCoin) => dispatch(coinsFetched(res.data.filter((item) =>
-                        item.symbol === 'BTC' ||
-                        item.symbol === 'ETH' ||
-                        item.symbol === 'ADA' ||
-                        item.symbol === 'USDT'
-                    ))))
-                    .catch(() => dispatch(coinsFetchingError()))
         )
     }
 
@@ -32,12 +21,10 @@ const MainService = () => {
     const getCoin = async(id: string | undefined) => {
         return (
             await request(`${_baseURL}assets/${id}`)
-                .then((res: any) => dispatch(coinFetched(res.data)))
-                .catch(() => dispatch(coinsFetchingError()))
         )
     }
 
-    return {getAllCoins, dispatch, getHistoryOfCoin, getCoin}
+    return {getAllCoins, getHistoryOfCoin, getCoin}
 }
 
 export default MainService;

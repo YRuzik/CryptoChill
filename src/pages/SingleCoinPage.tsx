@@ -1,14 +1,13 @@
 import LargeChart from "../components/largeChart/LargeChart";
 import {Container, Error} from "../styles/styles";
 import MainService from "../services/MainService";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {coinsFetching} from "../actions";
+import {coinFetched, coinsFetching, coinsFetchingError} from "../actions";
 import {useNavigate, useParams} from "react-router";
 import {Information, Market, Name, NameAndTable, WrapperChangerButton} from "./SingleCoinPage.style";
 import Spinner from "../components/spinner/Spinner";
 import {LinkButton} from "../components/coinsTable/CoinsTable.style";
-
 
 import ada from "resources/img/ada.png"
 import bit from "resources/img/bit.png"
@@ -17,15 +16,18 @@ import usdt from "resources/img/usdt.png"
 
 
 const SingleCoinPage = () => {
+    const dispatch = useDispatch()
     const {coinsLoadingStatus, coin}: any = useSelector(state => state)
     const {bitcoinID} = useParams()
-    const {dispatch, getCoin} = MainService();
+    const {getCoin} = MainService();
     const navigate = useNavigate()
 
 
     useEffect( () => {
         dispatch(coinsFetching());
-        if(bitcoinID) getCoin(bitcoinID).then()
+        if(bitcoinID) getCoin(bitcoinID)
+            .then((res: any) => dispatch(coinFetched(res.data)))
+            .catch(() => dispatch(coinsFetchingError()))
         let timerID = setInterval(() => getCoin(bitcoinID), 5000)
 
         return () => {

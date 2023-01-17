@@ -3,8 +3,6 @@ import mainService from "../../services/MainService";
 import {latestData} from "../../interfaces/interfaces";
 import {useEffect, useState} from "react";
 import TableCharts from "../tableCharts/TableCharts";
-import {Link, Navigate, redirect} from "react-router-dom";
-
 
 import ada from "resources/img/ada.png"
 import bit from "resources/img/bit.png"

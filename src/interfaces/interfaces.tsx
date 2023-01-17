@@ -19,7 +19,7 @@ export interface coin {
 }
 
 export interface resCoin {
-    data: coin[];
+    data: coin[]
     timestamp: number
 }
 
