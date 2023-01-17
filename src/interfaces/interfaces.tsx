@@ -18,9 +18,14 @@ export interface coin {
     vwap24Hr: string;
 }
 
-export interface coinIcons {
-    asset_id: string;
-    url: string;
+export interface resCoin {
+    data: coin[];
+    timestamp: number
+}
+
+export interface resData {
+    data: latestData[];
+    timestamp: number
 }
 
 export interface latestData {

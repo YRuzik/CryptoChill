@@ -7,17 +7,14 @@ import {coinsFetching} from "../actions";
 import {useNavigate, useParams} from "react-router";
 import {Information, Market, Name, NameAndTable, WrapperChangerButton} from "./SingleCoinPage.style";
 import Spinner from "../components/spinner/Spinner";
-
-// @ts-ignore
-import ada from "../resources/img/ada.png"
-// @ts-ignore
-import bit from "../resources/img/bit.png"
-// @ts-ignore
-import eth from "../resources/img/eth.png"
-// @ts-ignore
-import usdt from "../resources/img/usdt.png"
-import Error404 from "./404";
 import {LinkButton} from "../components/coinsTable/CoinsTable.style";
+
+
+import ada from "resources/img/ada.png"
+import bit from "resources/img/bit.png"
+import eth from "resources/img/eth.png"
+import usdt from "resources/img/usdt.png"
+
 
 const SingleCoinPage = () => {
     const {coinsLoadingStatus, coin}: any = useSelector(state => state)
@@ -63,8 +60,6 @@ const SingleCoinPage = () => {
     } else if (coinsLoadingStatus === 'error') {
         return <Error>Ошибка загрузки...</Error>
     }
-
-    console.log(coin)
 
     let style = ''
     let currentIMG = ''

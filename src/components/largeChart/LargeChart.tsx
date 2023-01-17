@@ -1,11 +1,10 @@
-import {AreaChart, Area, XAxis, YAxis, Tooltip, Legend} from "recharts";
-import {useCallback, useEffect, useRef, useState} from "react";
+import {AreaChart, Area, XAxis, Tooltip} from "recharts";
+import {useEffect, useState} from "react";
 import mainService from "../../services/MainService";
 import {useParams} from "react-router";
-import {latestData} from "../../interfaces/interfaces";
-import {coinsFetched, coinsFetching} from "../../actions";
-import {ChangerButton, StyledChangerButton, WrapperChangerButton} from "../../pages/SingleCoinPage.style";
-import {clearInterval} from "timers";
+import {latestData, resData} from "../../interfaces/interfaces";
+import {coinsFetching} from "../../actions";
+import {ChangerButton, WrapperChangerButton} from "../../pages/SingleCoinPage.style";
 
 const LargeChart = () => {
     const [allChanges, setAllChanges] = useState<latestData[]>()
@@ -16,7 +15,7 @@ const LargeChart = () => {
     const {bitcoinID} = useParams()
 
     const takeAllChanges = async () => {
-        await getHistoryOfCoin(bitcoinID).then(data => setAllChanges(data.data.map((item: any) => {
+        await getHistoryOfCoin(bitcoinID).then((data: resData) => setAllChanges(data.data.map((item) => {
             return {
                 date: new Date(item.date).toLocaleDateString("en-US"),
                 priceUsd: Number(item.priceUsd).toFixed(2),
@@ -47,7 +46,7 @@ const LargeChart = () => {
     }
 
     const takeHoursChanges = async () => {
-        await getHistoryOfCoin(bitcoinID, 'h1').then(data => setOneDayChanges(data.data.map((item: any) => {
+        await getHistoryOfCoin(bitcoinID, 'h1').then((data: resData) => setOneDayChanges(data.data.map((item) => {
             return {
                 date: new Date(item.date).toLocaleDateString("en-US"),
                 priceUsd: Number(item.priceUsd).toFixed(2),
@@ -56,9 +55,6 @@ const LargeChart = () => {
         }
         )))
     }
-
-
-
 
     let style = ''
     switch (bitcoinID) {

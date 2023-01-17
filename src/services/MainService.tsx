@@ -1,7 +1,7 @@
 import {useDispatch} from "react-redux";
 import {useHttp} from "../hooks/http.hook";
 import {coinFetched, coinsFetched, coinsFetchingError} from "../actions";
-import {coin} from "../interfaces/interfaces";
+import {resCoin} from "../interfaces/interfaces";
 
 
 const MainService = () => {
@@ -13,7 +13,7 @@ const MainService = () => {
     const getAllCoins = async() => {
         return (
             await request(`${_baseURL}assets`)
-                    .then((res: any) => dispatch(coinsFetched(res.data.filter((item: coin) =>
+                    .then((res: resCoin) => dispatch(coinsFetched(res.data.filter((item) =>
                         item.symbol === 'BTC' ||
                         item.symbol === 'ETH' ||
                         item.symbol === 'ADA' ||
