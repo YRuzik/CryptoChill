@@ -1,4 +1,3 @@
-import {LinkTo} from "../components/coinsTable/CoinsTable.style";
 import {Link} from "react-router-dom";
 
 const Error404 = () => {

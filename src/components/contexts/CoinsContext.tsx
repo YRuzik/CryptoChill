@@ -1,4 +1,4 @@
-import {coin, resCoin} from "../../interfaces/interfaces";
+import {coin, resAllCoin} from "../../interfaces/interfaces";
 import {createContext, useEffect} from "react";
 import mainService from "../../services/MainService";
 import {useDispatch} from "react-redux";
@@ -8,22 +8,26 @@ let inputValue = {
     data: [],
     timestamp: 0
 }
-export const CoinsContext = createContext<resCoin>(inputValue)
+export const CoinsContext = createContext<resAllCoin>(inputValue)
 
 function GlobalContext(props: any) {
     const {getAllCoins} = mainService()
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(coinsFetching());
+    const filterCoins = async () => {
         getAllCoins().then(data => dispatch(coinsFetched(data.data.filter((item: coin) =>
             item.symbol === 'BTC' ||
             item.symbol === 'ETH' ||
             item.symbol === 'ADA' ||
             item.symbol === 'USDT'
         ))))
+    }
 
-        const timerID = setInterval(getAllCoins, 20000)
+    useEffect(() => {
+        dispatch(coinsFetching());
+        filterCoins()
+
+        const timerID = setInterval(filterCoins, 10000)
         return () => {
             clearInterval(timerID)
         }

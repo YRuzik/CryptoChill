@@ -4,7 +4,6 @@ import {Table, TBody, TBodyTR, THead, THeadLabels, THeadTR, WrapperDiv} from "./
 import CoinsTableItem from "../coinsTableItem/CoinsTableItem";
 import Spinner from "../spinner/Spinner";
 
-
 const CoinsTable = () => {
     const {coins, coinsLoadingStatus}: any = useSelector(state => state)
 
@@ -23,7 +22,7 @@ const CoinsTable = () => {
             )
         })
     }
-    
+
     const elements = renderItems(coins)
 
     return (

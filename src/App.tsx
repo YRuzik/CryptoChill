@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Header from './components/header/Header';
-import {BrowserRouter as Router, Routes, useRouteError} from "react-router-dom";
+import {BrowserRouter as Router, Routes} from "react-router-dom";
 import {Route} from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import AboutUs from "./pages/AboutUs";
@@ -46,12 +46,6 @@ function App() {
           </Router>
       </GlobalContext>
   );
-}
-
-function ErrorBoundary() {
-    let error = useRouteError()
-    console.log(error)
-    return <Error404/>
 }
 
 export default App;

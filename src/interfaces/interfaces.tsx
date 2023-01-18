@@ -18,8 +18,13 @@ export interface coin {
     vwap24Hr: string;
 }
 
-export interface resCoin {
+export interface resAllCoin {
     data: coin[]
+    timestamp: number
+}
+
+export interface resCoin {
+    data: coin;
     timestamp: number
 }
 

@@ -9,6 +9,8 @@ import {Information, Market, Name, NameAndTable, WrapperChangerButton} from "./S
 import Spinner from "../components/spinner/Spinner";
 import {LinkButton} from "../components/coinsTable/CoinsTable.style";
 
+import {resCoin} from "../interfaces/interfaces";
+
 import ada from "resources/img/ada.png"
 import bit from "resources/img/bit.png"
 import eth from "resources/img/eth.png"
@@ -26,7 +28,7 @@ const SingleCoinPage = () => {
     useEffect( () => {
         dispatch(coinsFetching());
         if(bitcoinID) getCoin(bitcoinID)
-            .then((res: any) => dispatch(coinFetched(res.data)))
+            .then((res: resCoin) => dispatch(coinFetched(res.data)))
             .catch(() => dispatch(coinsFetchingError()))
         let timerID = setInterval(() => getCoin(bitcoinID), 5000)
 
