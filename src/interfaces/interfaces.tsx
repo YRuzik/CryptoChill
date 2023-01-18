@@ -2,6 +2,7 @@ export interface states {
     coins: object[];
     coin: object[];
     coinsLoadingStatus: string;
+    previousCoinValue: number;
 }
 
 export interface coin {

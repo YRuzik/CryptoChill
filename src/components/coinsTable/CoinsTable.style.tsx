@@ -5,7 +5,6 @@ import {Link} from "react-router-dom";
 export const WrapperDiv = styled.div`
   width: 100%;
   border-radius: 0px;
-  overflow-x: auto;
 `
 
 export const Table = styled.table`

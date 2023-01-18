@@ -25,3 +25,10 @@ export const coinFetched = (coin: coin) => {
         payload: coin
     }
 }
+
+export const previousCoinValueFetched = (previousValue: number) => {
+    return {
+        type: 'PREVIOUS_COIN_VALUE_FETCHED',
+        payload: previousValue
+    }
+}

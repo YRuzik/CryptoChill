@@ -3,7 +3,8 @@ import {states} from "../interfaces/interfaces";
 const initialState: states = {
     coins: [],
     coin: [],
-    coinsLoadingStatus: 'idle'
+    coinsLoadingStatus: 'idle',
+    previousCoinValue: 0
 }
 
 function reducer (state: states = initialState, action: any) {
@@ -31,6 +32,13 @@ function reducer (state: states = initialState, action: any) {
             return {
                 ...state,
                 coin: action.payload,
+                coinsLoadingStatus: 'idle'
+            }
+
+        case 'PREVIOUS_COIN_VALUE_FETCHED':
+            return {
+                ...state,
+                previousCoinValue: action.payload,
                 coinsLoadingStatus: 'idle'
             }
 

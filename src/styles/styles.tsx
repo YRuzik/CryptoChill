@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  margin: 55px auto;
+  margin: 4% auto;
   width: 65%;
-  
   
 `
 
