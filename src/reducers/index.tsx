@@ -4,7 +4,7 @@ const initialState: states = {
     coins: [],
     coin: [],
     coinsLoadingStatus: 'idle',
-    previousCoinValue: 0
+    previousCoinValue: []
 }
 
 function reducer (state: states = initialState, action: any) {
