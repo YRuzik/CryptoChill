@@ -13,7 +13,7 @@ const Header = () => {
         color: '#7e7e7e'
     }
     return (
-        <div style={{ borderBottom: '1px solid black' }}>
+        <div style={{ paddingTop: '1%' }}>
             <NavContainer>
                 <Box style={{ textAlign: "center" }}>
                     <NavLink  to='/'>

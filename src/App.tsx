@@ -11,6 +11,7 @@ import Error404 from "./pages/404";
 //@ts-ignore
 import McDuck from './resources/gif/McDuck.gif';
 
+
 function App() {
   return (
       <Router>
@@ -19,9 +20,7 @@ function App() {
 
             <main>
               <Routes>
-
                 <Route path={"/"} element={<MainPage/>}/>
-
                 <Route path={"/about"} element={<AboutUs/>}/>
 
                 <Route path={"/contacts"} element={<Contacts/>}/>
@@ -34,7 +33,6 @@ function App() {
             </main>
 
         </div>
-        <img className='FooterGif' src={McDuck}/>
       </Router>
   );
 }
