@@ -1,11 +1,10 @@
-import {AreaChart, Area, XAxis, YAxis, Tooltip, Legend} from "recharts";
-import {useCallback, useEffect, useRef, useState} from "react";
+import {AreaChart, Area, XAxis, Tooltip, ResponsiveContainer} from "recharts";
+import {useEffect, useState} from "react";
 import mainService from "../../services/MainService";
 import {useParams} from "react-router";
-import {latestData} from "../../interfaces/interfaces";
-import {coinsFetched, coinsFetching} from "../../actions";
-import {ChangerButton, StyledChangerButton, WrapperChangerButton} from "../../pages/SingleCoinPage.style";
-import {clearInterval} from "timers";
+import {latestData, resData} from "../../interfaces/interfaces";
+import {coinsFetching} from "../../actions";
+import {ChangerButton, WrapperAreaChart, WrapperChangerButton} from "../../pages/SingleCoinPage.style";
 
 const LargeChart = () => {
     const [allChanges, setAllChanges] = useState<latestData[]>()
@@ -16,9 +15,11 @@ const LargeChart = () => {
     const {bitcoinID} = useParams()
 
     const takeAllChanges = async () => {
-        await getHistoryOfCoin(bitcoinID).then(data => setAllChanges(data.data.map((item: any) => {
+        let months = ['Jan.','Feb.','Mar.','Apr.','May','June','July','Aug.','Sep.','Oct.','Nov.','Dec.']
+
+        await getHistoryOfCoin(bitcoinID).then((data: resData) => setAllChanges(data.data.map((item) => {
             return {
-                date: new Date(item.date).toLocaleDateString("en-US"),
+                date: new Date(item.date).getUTCDate().toLocaleString('en-US').toString() + ` ${months[new Date(item.date).getMonth()]}` + ` ${new Date(item.date).getUTCFullYear()}`,
                 priceUsd: Number(item.priceUsd).toFixed(2),
                 time: item.time
             }
@@ -33,32 +34,35 @@ const LargeChart = () => {
 
     const take1MChanges = async () => {
         await takeAllChanges()
-        await setCurrentChanges(allChanges?.slice(allChanges?.length-31, allChanges?.length-1))
+        await setCurrentChanges(allChanges?.slice(allChanges?.length-31, allChanges?.length))
     }
 
     const take1WChanges = async () => {
         await takeAllChanges()
-        await setCurrentChanges(allChanges?.slice(allChanges?.length-8, allChanges?.length-1))
+        await setCurrentChanges(allChanges?.slice(allChanges?.length-8, allChanges?.length))
     }
 
     const take1DChanges = async() => {
         await takeHoursChanges()
-        await setCurrentChanges(oneDayChanges?.slice(oneDayChanges?.length-25, oneDayChanges?.length-1))
+        await setCurrentChanges(oneDayChanges?.slice(oneDayChanges?.length-25, oneDayChanges?.length))
+    }
+
+    const getZero = (num: string) => {
+        if (+num < 10) {
+            return `0${num}`
+        } else return num
     }
 
     const takeHoursChanges = async () => {
-        await getHistoryOfCoin(bitcoinID, 'h1').then(data => setOneDayChanges(data.data.map((item: any) => {
+        await getHistoryOfCoin(bitcoinID, 'h1').then((data: resData) => setOneDayChanges(data.data.map((item) => {
             return {
-                date: new Date(item.date).toLocaleDateString("en-US"),
+                date: getZero(new Date(item.date).getHours().toString()) + ':00',
                 priceUsd: Number(item.priceUsd).toFixed(2),
                 time: item.time
             }
         }
         )))
     }
-
-
-
 
     let style = ''
     switch (bitcoinID) {
@@ -93,17 +97,19 @@ const LargeChart = () => {
                 <ChangerButton onClick={take1WChanges}>1 W.</ChangerButton>
                 <ChangerButton onClick={take1DChanges}>1 D.</ChangerButton>
             </WrapperChangerButton>
-        <AreaChart width={1280} height={500} data={currentChanges ? currentChanges : allChanges} style={{margin: '0', padding: '0'}}>
-            <defs>
-                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="20%" stopColor={style} stopOpacity={0.8}/>
-                    <stop offset="100%" stopColor={style} stopOpacity={0}/>
-                </linearGradient>
-            </defs>
-            <XAxis dataKey={'date'} domain={['']} />
-            <Tooltip content={CustomTooltip}/>
-            <Area name={'USD'} type="monotone" dataKey={'priceUsd'} stroke={style} fill={'url(#colorUv)'} fillOpacity={1} />
-        </AreaChart>
+            <ResponsiveContainer width={'100%'} height={500}>
+                <AreaChart data={currentChanges ? currentChanges : allChanges} style={{margin: '0', padding: '0'}}>
+                    <defs>
+                        <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="20%" stopColor={style} stopOpacity={0.8}/>
+                            <stop offset="100%" stopColor={style} stopOpacity={0}/>
+                        </linearGradient>
+                    </defs>
+                    <XAxis dataKey={'date'} interval={"preserveStart"} minTickGap={56} style={{display: 'flex', justifyContent: "space-around"}} />
+                    <Tooltip content={CustomTooltip}/>
+                    <Area name={'USD'} type="monotone" dataKey={'priceUsd'} stroke={style} fill={'url(#colorUv)'} fillOpacity={1} />
+                </AreaChart>
+            </ResponsiveContainer>
         </>
     )
 }

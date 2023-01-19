@@ -1,24 +1,21 @@
-import {states} from "../interfaces/interfaces";
+import {SourceActionType, states} from "../interfaces/interfaces";
 
-const initialState: states = {
-    coins: [],
+const initialState = {
     coin: [],
-    coinsLoadingStatus: 'idle'
+    coinsLoadingStatus: 'loading',
+
+    bitcoin: [],
+    ethereum: [],
+    tether: [],
+    cardano: []
 }
 
-function reducer (state: states = initialState, action: any) {
+function mainReducer (state = initialState, action: any) {
     switch (action.type){
         case 'COINS_FETCHING':
             return {
                 ...state,
                 coinsLoadingStatus: 'loading'
-            }
-
-        case 'COINS_FETCHED':
-            return {
-                ...state,
-                coins: action.payload,
-                coinsLoadingStatus: 'idle'
             }
 
         case 'COINS_FETCHING_ERROR':
@@ -34,8 +31,17 @@ function reducer (state: states = initialState, action: any) {
                 coinsLoadingStatus: 'idle'
             }
 
+        case SourceActionType.setSource: {
+            const { id, coin } = action.payload;
+            return {
+                ...state,
+                [id]: coin,
+                coinsLoadingStatus: 'idle'
+            };
+        }
+
         default: return state;
     }
 }
 
-export default reducer;
+export default mainReducer;

@@ -1,18 +1,13 @@
 import {LinkButton, LinkTo, TBodyTD} from "../coinsTable/CoinsTable.style";
 import mainService from "../../services/MainService";
 import {latestData} from "../../interfaces/interfaces";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import TableCharts from "../tableCharts/TableCharts";
-import {Link, Navigate, redirect} from "react-router-dom";
 
-// @ts-ignore
-import ada from "../../resources/img/ada.png"
-// @ts-ignore
-import bit from "../../resources/img/bit.png"
-// @ts-ignore
-import eth from "../../resources/img/eth.png"
-// @ts-ignore
-import usdt from "../../resources/img/usdt.png"
+import ada from "resources/img/ada.png"
+import bit from "resources/img/bit.png"
+import eth from "resources/img/eth.png"
+import usdt from "resources/img/usdt.png"
 
 
 const CoinsTableItem = ({name, symbol, priceUsd, current, id, changePercent24Hr}: any) => {
@@ -23,12 +18,17 @@ const CoinsTableItem = ({name, symbol, priceUsd, current, id, changePercent24Hr}
     changePercent24Hr = Number(changePercent24Hr).toFixed(2)
     let currentIMG = ''
 
-    const takeAllChanges = async () => {
+    const takeAllChanges = useCallback(async () => {
         await getHistoryOfCoin(id).then(data => setAllChanges(data.data))
-    }
+    }, [])
 
     useEffect(() => {
         takeAllChanges()
+
+        const timerID = setInterval(takeAllChanges, 20000)
+        return (() => {
+            clearInterval(timerID)
+        })
     }, [])
 
     switch (symbol) {

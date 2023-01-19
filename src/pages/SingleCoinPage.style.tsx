@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 
 export const NameAndTable = styled.div`
-  display: inline-grid;
+  width: 106%;
   padding: 1rem;
+  position: relative;
 `
 
 export const Name = styled.div`
@@ -44,9 +45,9 @@ export const ChangerButton = styled.button`
   }
 `
 
-export const StyledChangerButton = styled(ChangerButton)`
-    background-color: pink;
-    font-size: large;
+export const WrapperAreaChart = styled.div`
+  width: 80%;
+  height: 30%;
 `
 
 export const WrapperChangerButton = styled.div`
