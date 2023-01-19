@@ -13,6 +13,7 @@ import McDuck from "resources/gif/McDuck.gif"
 import GlobalContext from "./components/contexts/CoinsContext";
 import Toaster from "./components/toaster/Toaster";
 
+
 function App() {
   return (
       <GlobalContext>

@@ -1,4 +1,4 @@
-import { Content, ContentItemMcduck, ContentItemText } from "./about.style"
+import { Content, ContentItemMcduck, ContentItemText } from "./About.style"
 //@ts-ignore
 import McDuck from '../../resources/img/McDuck_1.png'
 const About = () =>{
@@ -15,7 +15,7 @@ const About = () =>{
                     <li>Cardano</li>
                 
             </ContentItemText>
-            <ContentItemMcduck style={{paddingLeft: '150px'}}><img width='420px' src={McDuck}></img></ContentItemMcduck>
+            <ContentItemMcduck style={{paddingLeft: '10%'}}><img width='75%' src={McDuck}></img></ContentItemMcduck>
         </Content>
     )
 }
