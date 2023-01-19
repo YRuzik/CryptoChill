@@ -1,4 +1,4 @@
-import PrimaryContent from "../components/BaseInformation/PrimaryContent";
+import PrimaryContent from "../components/primaryContent/PrimaryContent";
 import CoinsTable from "../components/coinsTable/CoinsTable";
 //@ts-ignore
 import McDuck from '../resources/gif/McDuck.gif';
