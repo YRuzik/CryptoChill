@@ -1,6 +1,6 @@
 import { Content, ContentItemMcduck, ContentItemText } from "./About.style"
-//@ts-ignore
-import McDuck from '../../resources/img/McDuck_1.png'
+import McDuck from 'resources/img/McDuck_1.png'
+
 const About = () =>{
     return(
         <Content>

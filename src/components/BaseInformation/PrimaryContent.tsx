@@ -1,6 +1,6 @@
 import { ContainerItem, Containter, ContainerItemImg } from "./PrimaryContent.style";
-//@ts-ignore
-import McDuck from '../../resources/img/McDuck_2.png'
+import McDuck from 'resources/img/McDuck_2.png'
+
 const PrimaryContent = () => {
     return (
             <Containter>

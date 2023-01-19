@@ -44,7 +44,6 @@ function App() {
                 </main>
 
             </div>
-            <footer className='FooterGif'><img src={McDuck}/></footer>
           </Router>
       </GlobalContext>
   );

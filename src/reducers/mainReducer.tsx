@@ -1,4 +1,4 @@
-import {SourceActionType, states} from "../interfaces/interfaces";
+import {SourceActionType} from "../interfaces/interfaces";
 
 const initialState = {
     coin: [],

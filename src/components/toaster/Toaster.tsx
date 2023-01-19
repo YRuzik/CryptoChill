@@ -13,7 +13,7 @@ const Toaster = () => {
     }
 
     useEffect(() => {
-        setValue((curValue) => curValue > bitcoin.priceUsd ? curValue : bitcoin.priceUsd)
+        setValue((curValue) => curValue = bitcoin.priceUsd)
         if (value && value !== bitcoin.priceUsd && !isNaN(value)) {
             setViewer(getChanges(bitcoin.priceUsd, value))
             setShowToaster(true)
