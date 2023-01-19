@@ -5,15 +5,6 @@ const TextContent =`
     font-style: normal;
     font-size: 30px;
 `
-const opacity = keyframes`
-    from{
-        transform: translateY(75%);
-        opacity: 0;
-    }
-    to{
-        opacity: 1;
-    }
-`
 
 export const Content = styled.div`
     ${TextContent};
@@ -26,7 +17,9 @@ export const Content = styled.div`
 `
 export const ContentItemMcduck= styled.div`
     position: static;
+    transform: scale(125%);
     flex: 0 1 auto;
+    padding-top: 1rem;
 `
 export const ContentItemText =styled.div`
     position: static;
@@ -34,5 +27,4 @@ export const ContentItemText =styled.div`
     flex-basis:30%;
     text-align:left;
     padding:50px;
-    animation: ${opacity} 1s ease-in-out;
 `

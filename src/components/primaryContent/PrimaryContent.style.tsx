@@ -3,8 +3,10 @@ import styled, { keyframes } from "styled-components";
 const TextContent =`
     font-family: 'Quicksand';
     font-style: normal;
-    font-size: 30px;
+    font-size: 2rem;
+   
 `
+
 const opacity = keyframes`
     from{
         opacity: 0;
@@ -20,12 +22,11 @@ export const Containter = styled.div`
     animation: ${opacity} 500ms linear ;
 `
 export const ContainerItem =styled.div`
-    ${TextContent}
+    ${TextContent};
     flex: 0 1 auto;
-    width:35%;
     flex-basis:30%;
-    text-align:left;
-    padding:25px;
+    text-align:right;
+    padding:1rem 10rem 1rem 1rem;
 `
 export const ContainerItemImg = styled.div`
     flex:0 1 auto;
