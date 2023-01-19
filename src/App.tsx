@@ -16,6 +16,7 @@ import Toaster from "./components/toaster/Toaster";
 function App() {
   return (
       <GlobalContext>
+          <Toaster/>
           <Router>
             <div className="App">
               <Header/>

@@ -40,3 +40,7 @@ export interface latestData {
     date: string;
 }
 
+export const SourceActionType = {
+    setSource: 'COINS_FETCHED'
+}
+

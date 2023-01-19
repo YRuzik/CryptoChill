@@ -1,55 +1,40 @@
 import {ExitButton, ToasterBody, ToasterContent, ToasterHeader, ToasterWrapper} from "./Toaster.style";
-import {useCallback, useEffect, useMemo, useRef, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {previousCoinValueFetched} from "../../actions";
+import {useEffect, useState} from "react";
+import {useSelector} from "react-redux";
 
-const Toaster = ({isReady}: any) => {
-    const {coins}: any = useSelector(state => state)
+const Toaster = () => {
+    const {bitcoin}: any = useSelector(state => state)
     const [showToaster, setShowToaster] = useState(false)
-    const [value, setValue] = useState<number | null>(null)
+    const [value, setValue] = useState<number>(0)
+    const [viewer, setViewer] = useState<number>(0)
 
-    useEffect(() => {
-        console.log('initialize')
-        setTimeout(() => {
-            console.log('setTimeoutReady!')
-            console.log(coins)
-            if(coins.length > 0) {
-                console.log('works!')
-                localStorage.setItem('prevCoin',coins[0].priceUsd)
-                console.log('++++++++', Number(localStorage.getItem('prevCoin')))
-                setInterval(() => {
-                    setValue(Number(localStorage.getItem('prevCoin')) - Number(coins[0].priceUsd))
-                    console.log('++++++++', Number(localStorage.getItem('prevCoin')))
-                    console.log('--------', Number(coins[0].priceUsd))
-                    setShowToaster(true)
-                    setTimeout(() => {
-                        setShowToaster(false)
-                    }, 5000)
-                }, 20000)
-            }
-        }, 5000)
-    }, [isReady])
-
-    const getChange = (prevValue: number, currentValue: number) => {
-        return prevValue - currentValue
+    const getChanges = (prevValue: string | number, currentValue: string | number) => {
+        return Number(prevValue) - Number(currentValue)
     }
 
+    useEffect(() => {
+        setValue((curValue) => curValue > bitcoin.priceUsd ? curValue : bitcoin.priceUsd)
+        if (value && value !== bitcoin.priceUsd && !isNaN(value)) {
+            setViewer(getChanges(bitcoin.priceUsd, value))
+            setShowToaster(true)
+            setTimeout(() => setShowToaster(false), 5000)
+        }
+    }, [bitcoin])
 
     const viewToaster = () => {
-        console.log(value)
         return (
             <>
-            {value !== null ? <ToasterWrapper style={value > 0 ?
+            {viewer ? <ToasterWrapper style={viewer > 0 ?
                 {backgroundColor: 'rgba(124, 252, 0,.25)', color: "green", border: '1px solid rgba(124, 252, 0)'} :
                 {backgroundColor: 'rgba(255, 69, 0, .25)', color: "rgba(255, 69, 0) ", border: '1px solid rgba(255, 69, 0)'}}
             >
                 <ToasterContent>
                     <ToasterHeader>
-                        <h4 style={{padding: 0, margin: 0}}>Bitcoin has {value > 0 ? 'grown' : 'fallen'}!</h4>
+                        <h4 style={{padding: 0, margin: 0}}>Bitcoin has {viewer > 0 ? 'grown' : 'fallen'}!</h4>
                         <h4 onClick={() => setShowToaster(false)} style={{padding: 0, margin: 0}}><ExitButton>╳</ExitButton></h4>
                     </ToasterHeader>
                     <ToasterBody>
-                        Bitcoin has {value > 0 ? 'grown' : 'fallen'} by {new Intl.NumberFormat("eu", {style: "decimal"}).format(+(Number(value).toFixed(2)))} $
+                        Bitcoin has {viewer > 0 ? 'grown' : 'fallen'} by {new Intl.NumberFormat("eu", {style: "decimal"}).format(+(Number(viewer).toFixed(2)))} $
                     </ToasterBody>
                 </ToasterContent>
             </ToasterWrapper>
@@ -59,12 +44,12 @@ const Toaster = ({isReady}: any) => {
         )
     }
 
-
     return (
         <>
             {showToaster ? viewToaster() : null}
         </>
     )
 }
+
 
 export default Toaster;

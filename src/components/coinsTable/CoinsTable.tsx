@@ -5,8 +5,7 @@ import CoinsTableItem from "../coinsTableItem/CoinsTableItem";
 import Spinner from "../spinner/Spinner";
 
 const CoinsTable = () => {
-    const {coins, coinsLoadingStatus}: any = useSelector(state => state)
-
+    const {coinsLoadingStatus, bitcoin, ethereum, cardano, tether}: any = useSelector(state => state)
     if (coinsLoadingStatus === 'loading') {
         return <Spinner/>
     } else if (coinsLoadingStatus === 'error') {
@@ -23,7 +22,7 @@ const CoinsTable = () => {
         })
     }
 
-    const elements = renderItems(coins)
+    const elements = renderItems([bitcoin, ethereum, cardano, tether])
 
     return (
         <Container>

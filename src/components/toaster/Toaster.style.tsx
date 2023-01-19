@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 export const ToasterWrapper = styled.div`
   min-height: 2.5rem;
-  max-width: 15rem;
+  width: 20rem;
   background: rgba(124, 252, 0,.25);
   position: fixed;
-  top: 87%;
-  left: 86.5%;
+  bottom: 1%;
+  right: 0.5%;
   border-radius: 10px;
   backdrop-filter: blur(20px);
   box-shadow: 0 0 10px rgba(0,0,0,.20);

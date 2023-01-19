@@ -30,7 +30,7 @@ const SingleCoinPage = () => {
         if(bitcoinID) getCoin(bitcoinID)
             .then((res: resCoin) => dispatch(coinFetched(res.data)))
             .catch(() => dispatch(coinsFetchingError()))
-        let timerID = setInterval(() => getCoin(bitcoinID), 5000)
+        let timerID = setInterval(() => getCoin(bitcoinID), 20000)
 
         return () => {
             clearInterval(timerID)
