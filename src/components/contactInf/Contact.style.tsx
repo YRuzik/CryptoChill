@@ -7,13 +7,13 @@ const TextContent =`
 `
 
 export const Container = styled.div`
-    margin: 2% auto;
+    margin: 3% auto;
     width: 65%;
-     display: grid; 
+    @media (min-width: 1024px) {display: grid; 
     grid-row-gap:0;
      grid-template-columns: 30% 70%; 
      grid-template-areas: 
-    "img text";
+    "img text";};
     ${TextContent}
     border: 1px solid rgba(0,0,0,.25);
     border-radius: 15px;
@@ -39,7 +39,12 @@ export const ScocialItem = styled.div`
 export const ContainerContentFirst = styled.div`
     text-align:start;
     ${TextContent};
-    padding-left: 5%;
+    @media (min-width: 320px) {
+        padding-left: 0%;
+    }
+    @media (min-width: 1024px) {
+        padding-left: 5%;
+    }
 `
 export const ContainerContentSecond = styled.div`
     text-align:end;
@@ -48,9 +53,15 @@ export const ContainerContentSecond = styled.div`
 `
 export const Name= styled.div`
     ${TextContent};
+    @media (min-width: 320px) {
+        font-size:125%;
+    }
     font-size:175%;
 `
 export const Description = styled.div`
     ${TextContent};
+    @media (min-width: 320px) {
+        font-size:85%;
+    }
     font-size:100%;
 `

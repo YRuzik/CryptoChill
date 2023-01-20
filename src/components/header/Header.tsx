@@ -1,7 +1,7 @@
 import { NavContainer, Box, BoxItem } from './Header.style';
 import { NavLink } from 'react-router-dom';
 // @ts-ignore
-import Logo from './Logo'
+import Logo from '../../resources/img/Logo.png'
 
 
 
@@ -13,15 +13,15 @@ const Header = () => {
         color: '#7e7e7e'
     }
     return (
-        <div style={{ paddingTop: '1%' }}>
+        <div>
             <NavContainer>
-                <Box style={{ textAlign: "center" }}>
+                <Box style={{ textAlign: "center" ,paddingInlineStart:'0'}}>
                     <NavLink  to='/'>
-                        <BoxItem  >
-                            <Logo />
+                        <BoxItem>
+                            <img src={Logo}/>
                         </BoxItem>
                         </NavLink>
-                        <BoxItem style={{ paddingLeft: '25px' }}>
+                        <BoxItem>
                         <NavLink style={({ isActive }) =>
                                 isActive ? on : off
                             } to='/'>
@@ -29,7 +29,6 @@ const Header = () => {
                             </NavLink>
                         </BoxItem>
                 </Box>
-                <Box style={{ margin: '9%' }}></Box>
                 <nav>
                     <Box>
                         <BoxItem
