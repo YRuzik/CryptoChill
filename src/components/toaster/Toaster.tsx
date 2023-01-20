@@ -25,7 +25,7 @@ const Toaster = () => {
         return (
             <>
             {viewer ? <ToasterWrapper style={viewer > 0 ?
-                {backgroundColor: 'rgba(124, 252, 0,.25)', color: "green", border: '1px solid rgba(124, 252, 0)'} :
+                {backgroundColor: 'rgba(124, 252, 0,.25)', color: "#228B22", border: '1px solid rgba(124, 252, 0)'} :
                 {backgroundColor: 'rgba(255, 69, 0, .25)', color: "rgba(255, 69, 0) ", border: '1px solid rgba(255, 69, 0)'}}
             >
                 <ToasterContent>

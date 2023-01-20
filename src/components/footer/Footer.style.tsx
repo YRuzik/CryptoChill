@@ -3,28 +3,27 @@ import {Link} from "react-router-dom";
 
 export const FooterContainer = styled.div`
   width: 100%;
-  height: 12.5rem;
-  bottom: 0;
+  min-height: 12.5rem;
   background: rgba(51,51,51);
   color: white;
   display: flex;
   align-items: center;
   user-select: none;
+  justify-content: center;
 `
 
 export const FooterContent = styled.div`
-  padding: 0 20rem 0 20rem;
-  font-size: 1.35rem;
-  display: flex;
+  font-size: 135%;
+  min-width: 65%;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 `
 
 export const Wrapper = styled.div`
   border-left: 2px solid rgba(255, 255, 255,.25);
-  padding: 3rem 0 3rem 0;
-  margin-left: 4rem;
-  display: block;
+  display: inline;
   
   div{
     padding-left: 1rem;
@@ -45,8 +44,7 @@ export const FooterLink = styled(Link)`
 `
 
 export const Support = styled.div`
-  padding-left: 13rem;
-  
+    text-align: end;
   
     ul {
       opacity: 0.5;
