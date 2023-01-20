@@ -1,8 +1,7 @@
 import { Container, ContainerContentFirst, ContainerContentSecond, Description, ImagePlace, Name, ScocialItem } from './Contact.style'
-//@ts-ignore
-import Eugene from '../../resources/img/Eugen.jpg'
-//@ts-ignore
-import Andrey from '../../resources/img/Andrey.jpg'
+
+import Eugene from 'resources/img/Eugen.jpg'
+import Andrey from 'resources/img/Andrey.jpg'
 
 
 const Contact = () => {
@@ -10,7 +9,7 @@ const Contact = () => {
         <>
             <Container>
                 <ImagePlace>
-                    <img src={Andrey} style={{ width: '100%' }} />
+                    <img alt={'developer_andrey'} src={Andrey} style={{ width: '100%' }} />
                 </ImagePlace>
                 <ContainerContentFirst>
                     <Name>ANDREY VAVANOV </Name>
@@ -21,14 +20,14 @@ const Contact = () => {
                         Nullam dictum felis eu pede mollis pretium. Integer tincidunt.
                     </Description>
                     <div>
-                        <ScocialItem style={{textAlign:'end',paddingRight:'1%'}}>
-                            <a target='_blank' href='https://github.com/YRuzik'>
+                        <ScocialItem style={{textAlign:'end',paddingRight:'1%', right: 0}}>
+                            <a target='_blank' rel={'noreferrer'} href='https://github.com/YRuzik'>
                                 <i className="fa-brands fa-github fa-2x" />
                             </a>
-                            <a target='_blank' href='https://t.me/xsivv'>
+                            <a target='_blank' rel={'noreferrer'} href='https://t.me/xsivv'>
                                 <i className="fa-brands fa-telegram fa-2x" />
                             </a>
-                            <a target='_blank' href='https://vk.com/gdevsepeople'>
+                            <a target='_blank' rel={'noreferrer'} href='https://vk.com/gdevsepeople'>
                                 <i style={{paddingLeft:'7px',paddingRight:'7px'}} className="fa-brands fa-vk fa-2x" />
                             </a>
                         </ScocialItem>
@@ -37,25 +36,25 @@ const Contact = () => {
             </Container>
             <Container style={{ direction: 'rtl' }}>
                 <ImagePlace>
-                    <img src={Eugene} style={{ width: '101%' }} />
+                    <img alt={'developer_eugene'} src={Eugene} style={{ width: '101%' }} />
                 </ImagePlace>
                 <ContainerContentSecond>
                     <Name>EVGENY RAZZHIVALOV</Name>
-                    <Description>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+                    <Description style={{ direction: 'ltr', textAlign:'left' }}>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
                         Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
                         Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
                         Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
                         Nullam dictum felis eu pede mollis pretium. Integer tincidunt.
                     </Description>
                     <div>
-                        <ScocialItem>
-                            <a target='_blank' href='https://vk.com/eugeneraz'>
+                        <ScocialItem style={{left: '1%'}}>
+                            <a target='_blank' rel={'noreferrer'} href='https://vk.com/eugeneraz'>
                                <i style={{paddingLeft:'7px',paddingRight:'7px'}} className="fa-brands fa-vk fa-2x" />
                             </a>
-                            <a target='_blank' href='https://t.me/byhappys'>
+                            <a target='_blank' rel={'noreferrer'} href='https://t.me/byhappys'>
                                <i className="fa-brands fa-telegram fa-2x" />
                             </a>
-                            <a target='_blank' href='https://github.com/byehappy'>
+                            <a target='_blank' rel={'noreferrer'} href='https://github.com/byehappy'>
                                 <i className="fa-brands fa-github fa-2x" />
                             </a>
                         </ScocialItem>

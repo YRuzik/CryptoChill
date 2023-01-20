@@ -52,7 +52,7 @@ const CoinsTableItem = ({name, symbol, priceUsd, current, id, changePercent24Hr}
             <TBodyTD>{current+1}</TBodyTD>
             <TBodyTD>
                 <LinkTo to={`/${id}`}>
-                    <img style={{paddingRight: '0.5rem'}} src={currentIMG !== undefined ? currentIMG : undefined}/>
+                    <img alt={'currentImg'} style={{paddingRight: '0.5rem'}} src={currentIMG !== undefined ? currentIMG : undefined}/>
                     {name}
                     <span style={{opacity: 0.5, paddingLeft: '0.5rem'}}>{symbol}</span>
                 </LinkTo>

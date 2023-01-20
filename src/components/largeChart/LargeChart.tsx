@@ -4,7 +4,7 @@ import mainService from "../../services/MainService";
 import {useParams} from "react-router";
 import {latestData, resData} from "../../interfaces/interfaces";
 import {coinsFetching} from "../../actions";
-import {ChangerButton, WrapperAreaChart, WrapperChangerButton} from "../../pages/SingleCoinPage.style";
+import {ChangerButton, WrapperChangerButton} from "../../pages/SingleCoinPage.style";
 
 const LargeChart = () => {
     const [allChanges, setAllChanges] = useState<latestData[]>()

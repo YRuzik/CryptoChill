@@ -7,7 +7,7 @@ const AboutUs = () => {
         <>
         <About/>
         <div style={{textAlign: 'start'}}>
-            <img style={{width: '10%',position: 'fixed',bottom: 0}} src={McDuck}/>
+            <img alt={'mcDuck'} style={{width: '10%',position: 'fixed',bottom: 0}} src={McDuck}/>
         </div>
         </>
     )

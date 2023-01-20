@@ -17,7 +17,7 @@ const About = () =>{
                 <li>{tether.name} <span style={{opacity: 0.5}}>{tether.symbol}</span></li>
                 
             </ContentItemText>
-            <ContentItemMcduck style={{paddingLeft: '10%'}}><img src={McDuck}></img></ContentItemMcduck>
+            <ContentItemMcduck style={{paddingLeft: '10%'}}><img alt={'mcDuck'} src={McDuck}></img></ContentItemMcduck>
         </Content>
     )
 }

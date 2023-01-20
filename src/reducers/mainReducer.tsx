@@ -1,6 +1,6 @@
-import {SourceActionType} from "../interfaces/interfaces";
+import {SourceActionType, states} from "../interfaces/interfaces";
 
-const initialState = {
+const initialState: states = {
     coin: [],
     coinsLoadingStatus: 'loading',
 
@@ -10,7 +10,7 @@ const initialState = {
     cardano: []
 }
 
-function mainReducer (state = initialState, action: any) {
+function mainReducer (state: states = initialState, action: any) {
     switch (action.type){
         case 'COINS_FETCHING':
             return {

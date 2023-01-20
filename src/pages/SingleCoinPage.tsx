@@ -24,13 +24,16 @@ const SingleCoinPage = () => {
     const {getCoin} = MainService();
     const navigate = useNavigate()
 
+    const takeCoin = async () => {
+        getCoin(bitcoinID)
+            .then((res: resCoin) => dispatch(coinFetched(res.data)))
+            .catch(() => dispatch(coinsFetchingError()))
+    }
 
     useEffect( () => {
         dispatch(coinsFetching());
-        if(bitcoinID) getCoin(bitcoinID)
-            .then((res: resCoin) => dispatch(coinFetched(res.data)))
-            .catch(() => dispatch(coinsFetchingError()))
-        let timerID = setInterval(() => getCoin(bitcoinID), 20000)
+        if(bitcoinID) takeCoin()
+        let timerID = setInterval(() => takeCoin(), 20000)
 
         return () => {
             clearInterval(timerID)
@@ -100,7 +103,7 @@ const SingleCoinPage = () => {
                     <NameAndTable>
                         <Name>
                             <h1 style={{textAlign: 'start', display: "flex", alignItems: "center", paddingLeft: '1rem'}}>
-                                <img src={currentIMG} style={{paddingRight: '5px'}}/>
+                                <img alt={'coin'} src={currentIMG} style={{paddingRight: '5px'}}/>
                                 {coin.name}
                                 <span style={{color: style, paddingLeft: '10px'}}>
                             {coin.symbol}

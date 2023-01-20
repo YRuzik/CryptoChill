@@ -18,7 +18,7 @@ const Header = () => {
                 <Box style={{ textAlign: "center" ,paddingInlineStart:'0'}}>
                     <NavLink  to='/'>
                         <BoxItem>
-                            <img src={Logo}/>
+                            <img alt={'logo'} src={Logo}/>
                         </BoxItem>
                         </NavLink>
                         <BoxItem>

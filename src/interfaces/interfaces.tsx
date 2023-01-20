@@ -1,8 +1,11 @@
 export interface states {
-    coins: object[];
     coin: object[];
     coinsLoadingStatus: string;
-    previousCoinValue: object[];
+
+    bitcoin: coin[],
+    ethereum: coin[],
+    tether: coin[],
+    cardano: coin[]
 }
 
 export interface coin {

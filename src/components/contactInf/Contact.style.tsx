@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 const TextContent =`
     font-family: 'Quicksand';
@@ -9,25 +9,33 @@ const TextContent =`
 export const Container = styled.div`
     margin: 3% auto;
     width: 65%;
-    @media (min-width: 1024px) {display: grid; 
-    grid-row-gap:0;
-     grid-template-columns: 30% 70%; 
-     grid-template-areas: 
-    "img text";};
+  @media (min-width: 300px) {
+    padding-bottom: 18%;
+  }
+    @media (min-width: 1024px) {
+      display: grid; 
+      grid-row-gap:0;
+      grid-template-columns: 30% 70%; 
+      grid-template-areas:"img text";
+      padding-bottom: 0%;
+    };
     ${TextContent}
     border: 1px solid rgba(0,0,0,.25);
     border-radius: 15px;
     padding: 15px;
     box-shadow: 0 0 25px rgba(0,0,0,.15);
     background-color: white;
+    position: relative;
 `
 export const ImagePlace = styled.div`
     grid-area: img;
     img{border-radius: 7px};
 `
 export const ScocialItem = styled.div`
-    padding-top:7%;
-    i{background-color: white;
+  position: absolute;
+  bottom: 3%;
+    i{
+      background-color: white;
         padding:4px;
         margin-left:5px;
         border: 1px solid rgba(0,0,0,.25);
@@ -35,6 +43,13 @@ export const ScocialItem = styled.div`
         margin-top:1%;
         color: #333333;
         };
+  
+  a{
+    transition: opacity 0.2s ease-in-out;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
 `
 export const ContainerContentFirst = styled.div`
     text-align:start;
