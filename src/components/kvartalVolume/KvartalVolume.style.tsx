@@ -17,4 +17,14 @@ export const KvartalVolumeWrapper = styled.div`
   grid-template-columns: 33% 33% 33%;
   align-items: center;
   padding-bottom: 1rem;
+  span{
+     h1{
+      @media (min-width: 1200px) {
+        font-size:4rem;
+      }
+      @media (min-width: 300px) {
+        font-size: 3rem;
+      }
+    }
+  }
 `

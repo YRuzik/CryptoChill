@@ -9,6 +9,12 @@ export const MainContainer = styled.div`
   
   img{
     margin-left: 1rem;
+    @media(min-width: 300px)  {
+      display:none;
+    }
+    @media (min-width: 1440px)  {
+      display:flex;
+    }
   }
 `
 
